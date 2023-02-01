@@ -3,7 +3,7 @@ def major_chord():
         if (fret_notes[i]) == tonic or (fret_notes[i]) == third or (fret_notes[i]) == fifth:
             continue
         else:
-            print('Not a major chord')
+            #print('Not a major chord')
             return 0
     return tonic
     
@@ -12,9 +12,45 @@ def minor_chord():
         if (fret_notes[i]) == tonic or (fret_notes[i]) == minor_third or (fret_notes[i]) == fifth:
             continue
         else:
-            print('Not a minor chord')
+            #print('Not a minor chord')
             return 0
     return tonic + 'm'
+
+def minor_with_seventh_minor():
+    for i in strings_to_check:
+        if (fret_notes[i]) == tonic or (fret_notes[i]) == minor_third or (fret_notes[i]) == fifth or (fret_notes[i]) == minor_seventh:
+            continue
+        else:
+            #print('Not a minor chord')
+            return 0
+    return tonic + 'm' + '7'
+
+def major_with_seventh_minor():
+    for i in strings_to_check:
+        if (fret_notes[i]) == tonic or (fret_notes[i]) == third or (fret_notes[i]) == fifth or (fret_notes[i]) == minor_seventh:
+            continue
+        else:
+            #print('Not a major chord')
+            return 0
+    return tonic + '7'
+
+def minor_with_seventh_major():
+    for i in strings_to_check:
+        if (fret_notes[i]) == tonic or (fret_notes[i]) == minor_third or (fret_notes[i]) == fifth or (fret_notes[i]) == major_seventh:
+            continue
+        else:
+            #print('Not a minor chord')
+            return 0
+    return tonic + 'm' + '7' + 'M'
+
+def major_with_seventh_major():
+    for i in strings_to_check:
+        if (fret_notes[i]) == tonic or (fret_notes[i]) == third or (fret_notes[i]) == fifth or (fret_notes[i]) == major_seventh:
+            continue
+        else:
+            #print('Not a major chord')
+            return 0
+    return tonic + '7' + 'M'
 
 notes = ('C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B') #12
 
@@ -55,12 +91,12 @@ fret_notes_index = []
 # string_fret.append(input())
 # string_fret.append(input())
 
-string_fret.append(5)
-string_fret.append(4)
-string_fret.append(2)
-string_fret.append(2)
-string_fret.append(2)
 string_fret.append(-1)
+string_fret.append(0)
+string_fret.append(2)
+string_fret.append(1)
+string_fret.append(1)
+string_fret.append(0)
 
 
 for i in range(6):
@@ -96,7 +132,7 @@ print('Tonic: ', tonic)
 print('Tonic index in the notes list: ', tonic_index)
 print('Tonic string: ', tonic_string)
 
-#verifies which note is the third (tonic + 2 tone) and the fifth (tonic + 3 1/2 tones)
+#identifies which note is the third (tonic + 2 tone) and the fifth (tonic + 3 1/2 tones)
 third_index = tonic_index + 4
 while third_index > 11:
     third_index = third_index - 12
@@ -108,12 +144,25 @@ while fifth_index > 11:
 fifth = notes[fifth_index]
 print('Fifth: ', fifth)
 
-#verifies the minor third
+#identifies the minor third
 minor_third_index = tonic_index + 3
 while minor_third_index > 11:
     minor_third_index = minor_third_index - 12
 minor_third = notes[minor_third_index]
 print('Minor third: ', minor_third)
+
+#identifies the minor and seventh
+minor_seventh_index = tonic_index + 10
+while minor_seventh_index > 11:
+    minor_seventh_index = minor_seventh_index - 12
+minor_seventh = notes[minor_seventh_index]
+print('Minor seventh: ', minor_seventh)
+
+major_seventh_index = tonic_index + 11
+while major_seventh_index > 11:
+    major_seventh_index = major_seventh_index - 12
+major_seventh = notes[major_seventh_index]
+print('Major seventh: ', major_seventh)
 
 #verifies which strings are played in the chord
 strings_to_check = []
@@ -125,3 +174,7 @@ print(strings_to_check)
 #verifies if its a major chord
 print(major_chord())
 print(minor_chord())
+print(minor_with_seventh_major())
+print(major_with_seventh_major())
+print(minor_with_seventh_minor())
+print(major_with_seventh_minor())
