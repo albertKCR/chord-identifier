@@ -3,7 +3,6 @@ def major_chord():
         if (fret_notes[i]) == tonic or (fret_notes[i]) == third or (fret_notes[i]) == fifth:
             continue
         else:
-            #print('Not a major chord')
             return 0
     return tonic
     
@@ -12,7 +11,6 @@ def minor_chord():
         if (fret_notes[i]) == tonic or (fret_notes[i]) == minor_third or (fret_notes[i]) == fifth:
             continue
         else:
-            #print('Not a minor chord')
             return 0
     return tonic + 'm'
 
@@ -21,7 +19,6 @@ def minor_with_seventh_minor():
         if (fret_notes[i]) == tonic or (fret_notes[i]) == minor_third or (fret_notes[i]) == fifth or (fret_notes[i]) == minor_seventh:
             continue
         else:
-            #print('Not a minor chord')
             return 0
     return tonic + 'm' + '7'
 
@@ -30,7 +27,6 @@ def major_with_seventh_minor():
         if (fret_notes[i]) == tonic or (fret_notes[i]) == third or (fret_notes[i]) == fifth or (fret_notes[i]) == minor_seventh:
             continue
         else:
-            #print('Not a major chord')
             return 0
     return tonic + '7'
 
@@ -39,7 +35,6 @@ def minor_with_seventh_major():
         if (fret_notes[i]) == tonic or (fret_notes[i]) == minor_third or (fret_notes[i]) == fifth or (fret_notes[i]) == major_seventh:
             continue
         else:
-            #print('Not a minor chord')
             return 0
     return tonic + 'm' + '7' + 'M'
 
@@ -48,10 +43,58 @@ def major_with_seventh_major():
         if (fret_notes[i]) == tonic or (fret_notes[i]) == third or (fret_notes[i]) == fifth or (fret_notes[i]) == major_seventh:
             continue
         else:
-            #print('Not a major chord')
             return 0
     return tonic + '7' + 'M'
 
+def half_diminished():
+    for i in strings_to_check:
+        if (fret_notes[i]) == tonic or (fret_notes[i]) == minor_third or (fret_notes[i]) == minor_fifth or (fret_notes[i]) == minor_seventh:
+            continue
+        else:
+            return 0
+    return tonic + 'm' + '7' + '(-5)'
+
+def diminished():
+    for i in strings_to_check:
+        if (fret_notes[i]) == tonic or (fret_notes[i]) == minor_third or (fret_notes[i]) == minor_fifth or (fret_notes[i]) == diminished_seventh:
+            continue
+        else:
+            return 0
+    return tonic + '°'
+
+def fourth():
+    for i in strings_to_check:
+        if (fret_notes[i]) == tonic or (fret_notes[i]) == major_fourth or (fret_notes[i]) == fifth:
+            continue
+        else:
+            return 0
+    return tonic + '4'
+
+def sixth():
+    for i in strings_to_check:
+        if (fret_notes[i]) == tonic or (fret_notes[i]) == third or (fret_notes[i]) == fifth or (fret_notes[i]) == major_sixth:
+            continue
+        else:
+            return 0
+    return tonic + '6'
+
+def ninth():
+    for i in strings_to_check:
+        if (fret_notes[i]) == tonic or (fret_notes[i]) == third or (fret_notes[i]) == fifth or (fret_notes[i]) == minor_seventh or (fret_notes[i]) == major_ninth:
+            continue
+        else:
+            return 0
+    return tonic + '9'
+
+def add_ninth():
+    for i in strings_to_check:
+        if (fret_notes[i]) == tonic or (fret_notes[i]) == third or (fret_notes[i]) == fifth or (fret_notes[i]) == major_ninth:
+            continue
+        else:
+            return 0
+    return tonic + 'add9'
+
+#----------------------------------------------------------------------------
 notes = ('C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B') #12
 
 tuning =[]
@@ -94,8 +137,8 @@ fret_notes_index = []
 string_fret.append(-1)
 string_fret.append(0)
 string_fret.append(2)
-string_fret.append(1)
-string_fret.append(1)
+string_fret.append(2)
+string_fret.append(3)
 string_fret.append(0)
 
 
@@ -151,7 +194,28 @@ while minor_third_index > 11:
 minor_third = notes[minor_third_index]
 print('Minor third: ', minor_third)
 
-#identifies the minor and seventh
+#identifies the major fourth
+major_fourth_index = tonic_index + 5
+while major_fourth_index > 11:
+    major_fourth_index = major_fourth_index - 12
+major_fourth = notes[major_fourth_index]
+print('Major fourth: ', major_fourth)
+
+#identifies the minor fifth
+minor_fifth_index = tonic_index + 6
+while minor_fifth_index > 11:
+    minor_fifth_index = minor_fifth_index - 12
+minor_fifth = notes[minor_fifth_index]
+print('Minor fifth: ', minor_fifth)
+
+#identifies the major sixth
+major_sixth_index = tonic_index + 9
+while major_sixth_index > 11:
+    major_sixth_index = major_sixth_index - 12
+major_sixth = notes[major_sixth_index]
+print('Major sixth: ', major_sixth)
+
+#identifies the minor, major and diminished seventh
 minor_seventh_index = tonic_index + 10
 while minor_seventh_index > 11:
     minor_seventh_index = minor_seventh_index - 12
@@ -164,17 +228,61 @@ while major_seventh_index > 11:
 major_seventh = notes[major_seventh_index]
 print('Major seventh: ', major_seventh)
 
+diminished_seventh_index = tonic_index + 9
+while diminished_seventh_index > 11:
+    diminished_seventh_index = diminished_seventh_index - 12
+diminished_seventh = notes[diminished_seventh_index]
+print('Diminished seventh: ', diminished_seventh)
+
+#identifies the major ninth
+major_ninth_index = tonic_index + 2
+while major_ninth_index > 11:
+    major_ninth_index = major_ninth_index - 12
+major_ninth = notes[major_ninth_index]
+print('Major ninth: ', major_ninth)
+
 #verifies which strings are played in the chord
 strings_to_check = []
 for i in range(6):
     if string_fret[i]!=-1:
         strings_to_check.append(i)
-print(strings_to_check)
+#print(strings_to_check)
 
-#verifies if its a major chord
-print(major_chord())
-print(minor_chord())
-print(minor_with_seventh_major())
-print(major_with_seventh_major())
-print(minor_with_seventh_minor())
-print(major_with_seventh_minor())
+print(tonic, 'scale: ', tonic, major_ninth, third, major_fourth, fifth, major_sixth, major_seventh)
+
+if major_chord()!=0:
+    print('Used notes: Tonic:', tonic, '; Third:', third, '; Fifth:', fifth)
+    print(major_chord())
+elif minor_chord()!=0:
+    print('Used notes: Tonic:', tonic, '; Minor third:', minor_third, '; Fifth:', fifth)
+    print(minor_chord())
+elif minor_with_seventh_major()!=0:
+    print('Used notes: Tonic:', tonic, '; Minor third:', minor_third, '; Fifth:', fifth, '; Minor seventh:', minor_seventh)
+    print(minor_with_seventh_major())
+elif major_with_seventh_major()!=0:
+    print('Used notes: Tonic:', tonic, '; Third:', third, '; Fifth:', fifth, '; Minor seventh:', minor_seventh)
+    print(major_with_seventh_major())
+elif minor_with_seventh_minor()!=0:
+    print('Used notes: Tonic:', tonic, '; Minor third:', minor_third, '; Fifth:', fifth, '; Seventh:', major_seventh)
+    print(minor_with_seventh_minor())
+elif major_with_seventh_minor()!=0:
+    print('Used notes: Tonic:', tonic, '; Third:', third, '; Fifth:', fifth, '; Seventh:', major_seventh)
+    print(major_with_seventh_minor())
+elif half_diminished()!=0:
+    print('Used notes: Tonic:', tonic, '; Minor third:', minor_third, '; Minor Fifth:', minor_fifth, '; Minor seventh:', minor_seventh)
+    print(half_diminished())
+elif diminished()!=0:
+    print('Used notes: Tonic:', tonic, '; Minor third:', minor_third, '; Minor Fifth:', minor_fifth, '; Diminished seventh:', diminished_seventh)
+    print(diminished())
+elif fourth()!=0:
+    print('Used notes: Tonic:', tonic, '; Fourth:', major_fourth, '; Fifth:', fifth)
+    print(fourth())
+elif sixth()!=0:
+    print('Used notes: Tonic:', tonic, '; Third:', third, '; Fifth:', fifth, '; Sixth:', major_sixth)
+    print(sixth())
+elif add_ninth()!=0:
+    print('Used notes: Tonic:', tonic, '; Third:', third, '; Fifth:', fifth, '; Ninth:', major_ninth)
+    print(add_ninth())
+elif ninth()!=0:
+    print('Used notes: Tonic:', tonic, '; Third:', third, '; Fifth:', fifth, '; Ninth:', major_ninth, '; Minor seventh:', minor_seventh)
+    print(ninth())
