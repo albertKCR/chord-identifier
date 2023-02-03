@@ -94,18 +94,19 @@ def add_ninth():
             return 0
     return tonic + 'add9'
 
+def fifth_():
+    for i in strings_to_check:
+        if (fret_notes[i]) == tonic or (fret_notes[i]) == fifth:
+            continue
+        else:
+            return 0
+    return tonic + '5'
+
 #----------------------------------------------------------------------------
 notes = ('C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B') #12
 
 tuning =[]
 note_index = []
-
-# tuning.append(input()) #E
-# tuning.append(input()) #A
-# tuning.append(input()) #D
-# tuning.append(input()) #G
-# tuning.append(input()) #B
-# tuning.append(input()) #E
 
 tuning.append('E')
 tuning.append('A')
@@ -127,19 +128,12 @@ string_fret = []
 fret_notes = []
 fret_notes_index = []
 
-# string_fret.append(input())
-# string_fret.append(input())
-# string_fret.append(input())
-# string_fret.append(input())
-# string_fret.append(input())
-# string_fret.append(input())
-
-string_fret.append(-1)
-string_fret.append(0)
-string_fret.append(2)
-string_fret.append(2)
+string_fret.append(1)
 string_fret.append(3)
-string_fret.append(0)
+string_fret.append(3)
+string_fret.append(-1)
+string_fret.append(-1)
+string_fret.append(-1)
 
 
 for i in range(6):
@@ -250,7 +244,10 @@ for i in range(6):
 
 print(tonic, 'scale: ', tonic, major_ninth, third, major_fourth, fifth, major_sixth, major_seventh)
 
-if major_chord()!=0:
+if fifth_()!=0:
+    print('Used notes: Tonic:', tonic,'; Fifth:', fifth)
+    print(fifth_())
+elif major_chord()!=0:
     print('Used notes: Tonic:', tonic, '; Third:', third, '; Fifth:', fifth)
     print(major_chord())
 elif minor_chord()!=0:
