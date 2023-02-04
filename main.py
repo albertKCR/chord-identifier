@@ -246,59 +246,48 @@ def main(*string_fret_list):
     print(tonic, 'scale: ', tonic, major_ninth, third, major_fourth, fifth, major_sixth, major_seventh)
 
     if fifth_()!=0:
-        print('Used notes: Tonic:', tonic,'; Fifth:', fifth)
-        print(fifth_())
-        return (fifth_())
+        note = fifth_()
+        return 'Tonic:' + tonic + ' - Fifth:' + fifth + ';' + note
     elif major_chord()!=0:
-        print('Used notes: Tonic:', tonic, '; Third:', third, '; Fifth:', fifth)
-        print(major_chord())
-        return (major_chord())
+        note = major_chord()
+        return 'Tonic:' + tonic + ' - Third:' + third + ' - Fifth:' + fifth + ';' + note
     elif minor_chord()!=0:
-        print('Used notes: Tonic:', tonic, '; Minor third:', minor_third, '; Fifth:', fifth)
-        print(minor_chord())
-        return (minor_chord())
+        note = minor_chord()
+        return 'Tonic:' + tonic + ' - Minor third:' + minor_third + ' - Fifth:' + fifth + ';' + note
     elif minor_with_seventh_major()!=0:
-        print('Used notes: Tonic:', tonic, '; Minor third:', minor_third, '; Fifth:', fifth, '; Minor seventh:', minor_seventh)
-        print(minor_with_seventh_major())
-        return (minor_with_seventh_major())
+        note = minor_with_seventh_major()
+        return 'Tonic:' + tonic + ' - Minor third:' + minor_third + ' - Fifth:' + fifth + ' - Major seventh:' + major_seventh + ';' + note
     elif major_with_seventh_major()!=0:
-        print('Used notes: Tonic:', tonic, '; Third:', third, '; Fifth:', fifth, '; Minor seventh:', minor_seventh)
-        print(major_with_seventh_major())
-        return (major_with_seventh_major())
+        note = major_with_seventh_major()
+        return 'Tonic:' + tonic + ' - Third:' + third + ' - Fifth:' + fifth + ' - Major seventh:' + major_seventh + ';' + note
     elif minor_with_seventh_minor()!=0:
-        print('Used notes: Tonic:', tonic, '; Minor third:', minor_third, '; Fifth:', fifth, '; Seventh:', major_seventh)
-        print(minor_with_seventh_minor())
-        return (minor_with_seventh_minor())
+        note = minor_with_seventh_minor()
+        return 'Tonic:' + tonic + ' - Minor third:' + minor_third + ' - Fifth:' + fifth + ' - Seventh:' + minor_seventh + ';' + note
     elif major_with_seventh_minor()!=0:
-        print('Used notes: Tonic:', tonic, '; Third:', third, '; Fifth:', fifth, '; Seventh:', major_seventh)
-        print(major_with_seventh_minor())
-        return (major_with_seventh_minor())
+        note = major_with_seventh_minor()
+        return 'Tonic:' + tonic + ' - Third:' + third + ' - Fifth:' + fifth + ' - Seventh:' + minor_seventh + ';' + note
     elif half_diminished()!=0:
-        print('Used notes: Tonic:', tonic, '; Minor third:', minor_third, '; Minor Fifth:', minor_fifth, '; Minor seventh:', minor_seventh)
-        print(half_diminished())
-        return (half_diminished())
+        note = half_diminished()
+        return 'Tonic:' + tonic + ' - Minor third:' + minor_third + ' - Minor Fifth:' + minor_fifth + ' - Minor seventh:' + minor_seventh + ';' + note
     elif diminished()!=0:
-        print('Used notes: Tonic:', tonic, '; Minor third:', minor_third, '; Minor Fifth:', minor_fifth, '; Diminished seventh:', diminished_seventh)
-        print(diminished())
-        return (diminished())
+        note = diminished()
+        return 'Tonic:' + tonic + ' - Minor third:' + minor_third + ' - Minor Fifth:' + minor_fifth + ' - Diminished seventh:' + diminished_seventh + ';' + note
     elif fourth()!=0:
-        print('Used notes: Tonic:', tonic, '; Fourth:', major_fourth, '; Fifth:', fifth)
-        print(fourth())
-        return (fourth())
+        note = fourth()
+        return 'Tonic:' + tonic + ' - Fourth:' + major_fourth + ' - Fifth:' + fifth + ';' + note
     elif sixth()!=0:
-        print('Used notes: Tonic:', tonic, '; Third:', third, '; Fifth:', fifth, '; Sixth:', major_sixth)
-        print(sixth())
-        return (sixth())
+        note = sixth()
+        return 'Tonic:' + tonic + ' - Third:' + third + ' - Fifth:' + fifth + ' - Sixth:' + major_sixth + ';' + note
     elif add_ninth()!=0:
-        print('Used notes: Tonic:', tonic, '; Third:', third, '; Fifth:', fifth, '; Ninth:', major_ninth)
-        print (add_ninth())
-        return (add_ninth())
+        note = add_ninth()
+        return 'Tonic:' + tonic + ' - Third:' + third + ' - Fifth:' + fifth + ' - Ninth:' + major_ninth + ';' + note
     elif ninth()!=0:
         print('Used notes: Tonic:', tonic, '; Third:', third, '; Fifth:', fifth, '; Ninth:', major_ninth, '; Minor seventh:', minor_seventh)
         print(ninth())
-        return (ninth())
+        note = ninth()
+        return 'Tonic:' + tonic + ' - Third:' + third + ' - Fifth:' + fifth + ' - Ninth:' + major_ninth + ' - Minor seventh:' + minor_seventh + ';' + note
     else:
-      return '0' 
+      return '-;-'  
 
 import string
 from flask import Flask, redirect, render_template, request, url_for
@@ -318,8 +307,10 @@ def input():
       string_fret.append(int(request.form['string3']))
       string_fret.append(int(request.form['string2']))
       string_fret.append(int(request.form['string1']))
-      print(string_fret)
-      return main(*string_fret)
+      output = main(*string_fret).split(';')
+      nota = output[1]
+      chord_notes = output[0]
+      return render_template('index.html', nota=nota, chord_notes=chord_notes)
    else:
       return render_template('index.html')
 
