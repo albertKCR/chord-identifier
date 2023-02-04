@@ -14,4 +14,4 @@ The chords that the program cover are:<br>
 - Power Chords
 <br>
 The tuning is defined in the 'tuning' list. The string frets are defined in the 'string_fret' list, strings that aren't played are defined as -1 in the list.
-<a href="https://naturally-dark-newt-matrix-dev.wayscript.cloud">Deployed here.</a>
+<a href="https://chord-identifer--xx.herokuapp.com">Deployed here.</a>
