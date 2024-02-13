@@ -1,6 +1,3 @@
-from flask import Flask
-app = Flask(__name__)
-
 def main(*string_fret_list):
     def major_chord():
         for i in strings_to_check:
@@ -314,4 +311,4 @@ def input():
       return render_template('index.html')
 
 if __name__ == "__main__":
-  app.run(debug=True) 
+  app.run() 
