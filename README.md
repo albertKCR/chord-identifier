@@ -15,3 +15,5 @@ The chords that the program cover are:<br>
 <br>
 The tuning is defined in the 'tuning' list. The string frets are defined in the 'string_fret' list, strings that aren't played are defined as -1 in the list.<br>
 The front end was developed with flask in python.
+
+https://flask-on-koyeb-utfpr.koyeb.app/
